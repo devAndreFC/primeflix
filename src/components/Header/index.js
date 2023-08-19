@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function Header(){
     return(
         <header>
-            <Link className='logo' to='/'>Prime Flix</Link>
+            <Link className='logo' to='/'>Movie Flix</Link>
             <Link className='favorites' to='/favoritos'>Meus Filmes</Link>
         </header>
     )
