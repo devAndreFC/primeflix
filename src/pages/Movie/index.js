@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import api from "../../services/api"
 import './movie.css'
 
 
 function Movie(){
     const { id } = useParams()
+    const navigate = useNavigate()
     const [movie, setMovie] = useState({})
     const [loading, setLoading] = useState(true)
 
@@ -22,7 +23,9 @@ function Movie(){
                 setLoading(false)
             })
             .catch(()=>{
-                console.log('filme nao encontrado')
+                alert('Filme não encontrado')
+                navigate("/", {replace: true})
+                return
             })
         }
         loadMovie()
@@ -30,7 +33,23 @@ function Movie(){
         return () =>{
             console.log('Componente desmontado')
         }
-    }, [])
+    }, [navigate, id])
+
+    function saveMovie(){
+        const myList = localStorage.getItem("@movieflix")
+        let movieSaves = JSON.parse(myList) || []
+
+        const hasMovie = movieSaves.some((movieSave)=> movieSave.id === movie.id)
+
+        if (hasMovie){
+            alert('Este filme já está na lista!')
+            return
+        }
+
+        movieSaves.push(movie)
+        localStorage.setItem("@movieflix", JSON.stringify(movieSaves))
+        alert("Filme adicionado com sucesso!")
+    }
 
     if (loading){
         return(
@@ -46,11 +65,13 @@ function Movie(){
             <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt={movie.title}></img>
             <h3>Sinopse</h3>
             <span>{movie.overview}</span>
-            <strong>Avaliação: {movie.vote_average} / 10</strong>
+            <strong>Avaliação: {movie.vote_average.toFixed(1)} de 10</strong>
+            <strong>Título original: {movie.original_title}</strong>
+            <strong>Data de lançamento: {movie.release_date}</strong>
             <div className="area-button">
-                <button>Salvar</button>
+                <button onClick={saveMovie}>Salvar</button>
                 <button>
-                    <a href="#">Trailer</a>
+                    <a target="_blank" rel="external" href={`https://youtube.com/results?search_query=${movie.title}`}>Trailer</a>
                 </button>
             </div>
 
