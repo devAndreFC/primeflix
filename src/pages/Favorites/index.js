@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import './favorites.css'
 import { Link } from 'react-router-dom'
@@ -11,9 +12,21 @@ function Favorites(){
         setMovies(JSON.parse(myList) || [])
     }, [])
 
+    function deleteMovie(id){
+        let filterMovies = movies.filter((item)=>{
+            return(item.id != id)
+        })
+        setMovies(filterMovies)
+        localStorage.setItem("@movieflix", JSON.stringify(filterMovies))
+        toast.success(`Filme excluído com sucesso!`)
+
+    }
+
     return(
         <div className='my-movies'>
             <h1>Meus filmes</h1>
+
+            {movies.length === 0 && <span>Você não possui filmes salvos.</span>}
             <ul>
                 {movies.map((item)=>{
                     return(
@@ -21,7 +34,7 @@ function Favorites(){
                             <span>{item.title}</span>
                             <div>
                                 <Link to={`/filme/${item.id}`}>Ver detalhes</Link>
-                                <button>Excluir</button>
+                                <button onClick={()=> deleteMovie(item.id)}>Excluir</button>
                             </div>
                         </li>
                     )

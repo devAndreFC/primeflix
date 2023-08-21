@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import api from "../../services/api"
 import './movie.css'
+import { toast } from "react-toastify"
 
 
 function Movie(){
@@ -23,7 +24,7 @@ function Movie(){
                 setLoading(false)
             })
             .catch(()=>{
-                alert('Filme não encontrado')
+                toast.warning('Filme não encontrado')
                 navigate("/", {replace: true})
                 return
             })
@@ -42,13 +43,13 @@ function Movie(){
         const hasMovie = movieSaves.some((movieSave)=> movieSave.id === movie.id)
 
         if (hasMovie){
-            alert('Este filme já está na lista!')
+            toast.warn('Este filme já está na lista!')
             return
         }
 
         movieSaves.push(movie)
         localStorage.setItem("@movieflix", JSON.stringify(movieSaves))
-        alert("Filme adicionado com sucesso!")
+        toast.success("Filme adicionado com sucesso!")
     }
 
     if (loading){
