@@ -17,7 +17,6 @@ function Home(){
                     page: 1
                 }
             })
-            // console.log(response.data.results.slice(0, 10))
             setMovies(response.data.results.slice(0, 10))
             setLoading(false)
         }
@@ -37,7 +36,6 @@ function Home(){
             <br/><h1 className="title-home">Filmes atualmente em cartaz:</h1>
             <div className="list-movies">
                 {movies.map((movie)=>{
-                    console.log(movie)
                     return(
                         <article key={movie.id}>
                             <strong>{movie.title}</strong>
