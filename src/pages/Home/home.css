@@ -3,6 +3,9 @@
     margin: 14px auto;
 }
 
+.title-home{
+    text-align: center;
+}
 .list-movies article{
     width: 100%;
     background-color: #fff;

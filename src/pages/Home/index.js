@@ -34,9 +34,10 @@ function Home(){
     
     return(
         <div className="container">
-            <br/><h1>Filmes atualmente em cartaz:</h1>
+            <br/><h1 className="title-home">Filmes atualmente em cartaz:</h1>
             <div className="list-movies">
                 {movies.map((movie)=>{
+                    console.log(movie)
                     return(
                         <article key={movie.id}>
                             <strong>{movie.title}</strong>
