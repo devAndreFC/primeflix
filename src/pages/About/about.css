@@ -2,12 +2,13 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    text-align: center;
+    text-align: justify;
 }
   
 .sobre-container h1 {
     font-size: 28px;
     margin-bottom: 10px;
+    text-align: center;
 }
   
 .sobre-container h2 {
@@ -41,4 +42,15 @@
 .contato-links li a:hover {
     background-color: #333;
     color: #fff;
+}
+
+.explanation{
+    justify-content: left;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.tecnologies{
+    font-size: 18px;
+    margin-top: 10px;
 }

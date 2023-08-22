@@ -30,13 +30,14 @@ function Favorites(){
             <ul>
                 {movies.map((item)=>{
                     return(
-                        <li key={item.id}> 
+                        <li key={item.id}>
                             <span>{item.title}</span>
                             <div>
                                 <Link to={`/filme/${item.id}`}>Ver detalhes</Link>
                                 <button onClick={()=> deleteMovie(item.id)}>Excluir</button>
                             </div>
                         </li>
+                        
                     )
                 })}
             </ul>
